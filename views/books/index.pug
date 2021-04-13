@@ -5,15 +5,17 @@ block content
         .mt-5.bg-light.p-3.rounded
             if books.length
                 h4.mt-3.mb-3 Книги
-                .row
-                    .col
+                .row.justify-content-start
+                    .col-auto
                         a.btn.btn-outline-success(href='/books/add') Добавить книгу
+                    .col
+                        a.btn.btn-outline-primary.disabled(href='/books/export/csv') Выгрузить в файл
             .row.row-cols-1.row-cols-md-2.g-4.pt-3
                 each book in books
                     .col
                         .card.h-100
                             .card-body
-                                h2.card-title #{book.title}
+                                h2.card-title.text-uppercase #{book.title}
                                 p.card-text #{book.description}
                             .card-footer.bg-transparent
                                 .d-flex.justify-content-end

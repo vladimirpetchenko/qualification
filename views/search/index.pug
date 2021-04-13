@@ -9,13 +9,15 @@ block content
                   .col
                       .card.h-100
                           .card-body
-                              h2.card-title #{book.title}
+                              h2.card-title.text-uppercase #{book.title}
                               p.card-text #{book.description}
                           .card-footer.bg-transparent
                               .d-flex.justify-content-end
                                   if book.author
                                       .book-info
                                           p.small.text-muted.m-0.p-0  #{book.author.lastname} #{book.author.name} #{book.author.midname}
+                                          if book.genre
+                                            p.small.text-muted.m-0.p-0.text-capitalize  #{book.genre}
                               a.btn.btn-outline-success(href=`/books/one/${book.id}`) Просмотр
         else
             .row

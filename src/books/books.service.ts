@@ -20,17 +20,29 @@ export class BooksService {
 
   async search(query: string): Promise<Book[]> {
     return await this.bookRepository.find({
-      where: {
-        title: Like(`%${query}%`),
-      },
+      relations: ['author'],
+      where: [
+        {
+          title: Like(`%${query.toLowerCase()}%`),
+        },
+        {
+          genre: Like(`%${query.toLowerCase()}%`),
+        },
+      ],
     });
   }
 
   async save(book: Book): Promise<Book> {
+    book.title = book.title.toLowerCase();
+    book.description = book.description.toLowerCase();
+    book.genre = book.genre.toLowerCase();
     return await this.bookRepository.save(book);
   }
 
   async update(id: number, book: Book): Promise<UpdateResult> {
+    book.title = book.title.toLowerCase();
+    book.description = book.description.toLowerCase();
+    book.genre = book.genre.toLowerCase();
     return await this.bookRepository.update(id, book);
   }
 

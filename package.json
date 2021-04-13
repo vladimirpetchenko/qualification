@@ -25,6 +25,7 @@
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/typeorm": "^7.1.5",
     "alpinejs": "^2.8.2",
+    "export-to-csv": "^0.2.1",
     "pug": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

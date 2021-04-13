@@ -4,14 +4,16 @@ import {
   Get,
   Logger,
   Param,
-  Post, Query,
+  Post,
+  Query,
   Render,
-  Res
-} from "@nestjs/common";
+  Res,
+} from '@nestjs/common';
 import { BooksService } from './books.service';
 import { Book } from './entities/book.entity';
 import { PublishersService } from '../publishers/publishers.service';
 import { AuthorsService } from '../authors/authors.service';
+import { ExportToCsv } from 'export-to-csv';
 
 @Controller('books')
 export class BooksController {
@@ -68,6 +70,26 @@ export class BooksController {
     };
   }
 
+  @Get('/export/csv')
+  async exportToCsv(): Promise<any> {
+    const books = await this.booksService.getAll();
+
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: 'My Awesome CSV',
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+    };
+
+    const exporter = new ExportToCsv(options);
+    return await exporter.generateCsv(books);
+  }
+
   @Post('/save')
   async saveBook(@Res() res, @Body() book: Book): Promise<any> {
     const savedBook = await this.booksService.save(book);
@@ -75,7 +97,11 @@ export class BooksController {
   }
 
   @Post('/updatebook/:id')
-  async updateBook(@Param() id: number, @Res() res, @Body() book: Book): Promise<any> {
+  async updateBook(
+    @Param() id: number,
+    @Res() res,
+    @Body() book: Book,
+  ): Promise<any> {
     const savedBook = await this.booksService.update(id, book);
     return savedBook ? res.redirect('/books') : 'Ошибка сохранения';
   }
