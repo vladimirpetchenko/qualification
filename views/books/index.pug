@@ -1,0 +1,41 @@
+extends ../layouts/layout
+
+block content
+    .container-fluid
+        .mt-5.bg-light.p-3.rounded
+            if books.length
+                h4.mt-3.mb-3 Книги
+                .row
+                    .col
+                        a.btn.btn-outline-success(href='/books/add') Добавить книгу
+            .row.row-cols-1.row-cols-md-2.g-4.pt-3
+                each book in books
+                    .col
+                        .card.h-100
+                            .card-body
+                                h2.card-title #{book.title}
+                                p.card-text #{book.description}
+                            .card-footer.bg-transparent
+                                .d-flex.justify-content-end
+                                    if book.author
+                                        .book-info
+                                            p.small.text-muted.m-0.p-0  #{book.author.lastname} #{book.author.name} #{book.author.midname}
+                                            if book.genre
+                                                p.small.text-muted.m-0.p-0 Жанр: #{book.genre}
+                                a.btn.btn-outline-success(href=`/books/one/${book.id}`) Просмотр
+            if !books.length
+                .row
+                    .col-12
+                        .jumbotron.p-3
+                            h1.display-4 В системе нет ни одной книги
+                            p.lead
+                                | Добавьте книгу, чтобы увидеть список всех книг
+                            hr.my-4
+                            p
+                                | При добавлении книги, необходимо указать автора и издательство, вы тажке можете перейти к их добавлению нажав соотвествующую кнопку
+                            p.lead
+                                .btn-group
+                                    a.btn.btn-success.btn-lg(href='/books/add') Добавить книгу
+                                    a.btn.btn-primary.btn-lg(href='/authors/add') Добавить автора
+                                    a.btn.btn-primary.btn-lg(href='/publishers/add') Добавить издательство
+

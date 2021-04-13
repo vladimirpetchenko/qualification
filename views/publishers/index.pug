@@ -1,0 +1,33 @@
+extends ../layouts/layout
+
+block content
+    .container-fluid
+        .mt-5.bg-light.p-3.rounded
+            if publishers.length
+                h4.mt-3.mb-3 Издательства
+                .row
+                    .col
+                        a.btn.btn-outline-success(href='/publishers/add') Добавить издательство
+            .row.row-cols-1.row-cols-md-2.g-4.pt-3
+                each publisher in publishers
+                    .col
+                        .card.h-100
+                            .card-body
+                                h4.card-title #{publisher.title}
+                                p.card-text #{publisher.description}
+                            .card-footer.bg-transparent
+                                a.btn.btn-outline-success(href=`/publishers/one/${publisher.id}`) Просмотр
+            if !publishers.length
+                .row
+                    .col-12
+                        .jumbotron.p-3
+                            h1.display-4 В системе нет ни одного издательства
+                            p.lead
+                                | Для добавления в систему нового издательства пожалуйста нажмите на кнопку 'Добавить издательство'
+                            hr.my-4
+                            p
+                                | При добавлении книги, необходимо указать издательство, Вы можете дообавить его здесь, либо при создании книги
+                            p.lead
+                                a.btn.btn-outline-success.btn-lg(href='/publishers/add') Добавить издательство
+
+

@@ -1,0 +1,25 @@
+extends ../layouts/layout
+
+block content
+    .container.pt-5
+        h2.title.mb-3 Новый автор
+        form(action='/authors/save' method='post')
+            .mb-3
+                label.form-label(for='authorLastname') Фамилия автора
+                input#authorLastname.form-control(type='text' name='lastname')
+                .form-text Введите фамилию автора
+            .mb-3
+                label.form-label(for='authorName') Имя автора
+                input#authorName.form-control(type='text' name='name')
+                .form-text Введите имя автора
+            .mb-3
+                label.form-label(for='authorMidname') Отчество автора
+                input#authorMidname.form-control(type='text' name='midname')
+                .form-text Введите отчество автора
+            .mb-3
+                label.form-label(for='authorBio') Краткая биография
+                textarea#authorBio.form-control(rows=5 name='bio')
+                .form-text Введите имя автора
+
+            button.btn.btn-outline-primary(type='submit') Добавить
+

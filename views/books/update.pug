@@ -1,0 +1,38 @@
+extends ../layouts/layout
+
+block content
+    .container.pt-5
+        h2.title.mb-3 Изменить книгу '#{book.title}'
+        form(action=`/books/updatebook/${book.id}` method='post')
+            .mb-3
+                label.form-label(for='bookTitle') Название книги
+                input#bookTitle.form-control(type='text' name='title' required='true' value=book.title)
+                .form-text Введите название книги
+            .mb-3
+                label.form-label(for='bookDescription') Описание книги
+                textarea#bookDescription.form-control(rows=5 name='description' required='true') #{book.description}
+                .form-text Введите краткое описание книги
+            .mb-5
+                label.form-label(for='bookGenre') Жанр
+                input#bookGenre.form-control(name='genre' required='true' value=book.genre)
+                .form-text Введите жанр
+            .mb-5
+                .d-flex.pb-3.align-items-center.justify-content-between
+                    label.form-label(for='publisherSelected') Издательства
+                    a.btn.btn-outline-success(href='/publishers/add') Создать новое издательство
+                select#publisherSelected.form-select(name='publisher')
+                  each publish in publishers
+                      option(value=publish.id) #{publish.title}
+            .mb-3
+                .d-flex.pb-3.lign-items-center.justify-content-between
+                    label.form-label(for='authorSelected') Авторы
+                    a.btn.btn-outline-success(href='/authors/add') Создать нового автора
+                select#authorSelected.form-select(name='author')
+                  each author in authors
+                      option(value=author.id) #{author.lastname} #{author.name} #{author.midname}
+            .mb-3
+                label.form-label(for='bookRating') Рейтинг
+                input#bookRating.form-control(type='number' name='rating' max='100' min='0' value=book.rating)
+                .form-text Введите субъективный рейтинг данной книги
+            button.btn.btn-outline-primary(type='submit') Сохранить
+

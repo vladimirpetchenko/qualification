@@ -1,0 +1,12 @@
+extends ../layouts/layout
+
+block content
+    .container.pt-5
+        h2.title.mb-3 Новое издательство
+        form(action='/publishers/save' method='post')
+            .mb-3
+                label.form-label(for='bookTitle') Название издательства
+                input#bookTitle.form-control(type='text' name='title')
+                .form-text Введите название издательства
+            button.btn.btn-outline-primary(type='submit') Добавить
+

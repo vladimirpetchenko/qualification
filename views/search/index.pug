@@ -1,0 +1,26 @@
+extends ../layouts/layout
+
+block content
+    .container.pt-5
+        h2.title.mb-3 Поиск по '#{query}'
+        if books.length
+            .row.row-cols-1.row-cols-md-2.g-4.pt-3
+              each book in books
+                  .col
+                      .card.h-100
+                          .card-body
+                              h2.card-title #{book.title}
+                              p.card-text #{book.description}
+                          .card-footer.bg-transparent
+                              .d-flex.justify-content-end
+                                  if book.author
+                                      .book-info
+                                          p.small.text-muted.m-0.p-0  #{book.author.lastname} #{book.author.name} #{book.author.midname}
+                              a.btn.btn-outline-success(href=`/books/one/${book.id}`) Просмотр
+        else
+            .row
+                .col-12
+                    .jumbotron.p-3
+                        h1.display-4 К сожалению книг по данному запросу не найдено
+                        p.lead
+                            | Попробуйте изменить запрос

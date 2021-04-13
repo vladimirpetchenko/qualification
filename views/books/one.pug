@@ -1,0 +1,25 @@
+extends ../layouts/layout
+
+block content
+    .container.pt-5
+        .row.justify-content-end
+            .col-md-2
+                form(method='post' action='/books/delete')
+                    input(type='hidden' value=book.id name='id')
+                    .d-flex.justify-content-end
+                        .d-flex.justify-content-between
+                            a.btn.btn-outline-warning.mx-2(href=`/books/update/${book.id}`) Изменить
+                            button.btn.btn-outline-danger(type='submit') Удалить
+        .row
+            .col-12
+                .jumbotron.bg-light.rounded.p-5
+                    h2.display-4 #{book.title}
+                    p.lead #{book.description}
+                    .mb-3
+                        p.text-muted.small Автор: #{book.author.lastname} #{book.author.name} #{book.author.midname}
+                    .mb-3
+                        p.text-muted.small Издательство: #{book.publisher.title}
+                    if book.rating
+                        .mb-3
+                            p.text-muted Рейтинг: #{book.rating}
+
