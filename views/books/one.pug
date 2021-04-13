@@ -22,4 +22,13 @@ block content
                     if book.rating
                         .mb-3
                             p.text-muted Рейтинг: #{book.rating}
+                    if book.genre
+                        .mb-3
+                            p.text-muted Жанр: #{book.genre}
+                    if book.in_library
+                        .mb-3
+                            p.text-muted На данный момент в наличии
+                    else
+                        .mb-3
+                            p.text-muted Нет в наличии
 

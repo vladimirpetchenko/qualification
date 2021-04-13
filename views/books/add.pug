@@ -34,5 +34,9 @@ block content
                 label.form-label(for='bookRating') Рейтинг
                 input#bookRating.form-control(type='number' name='rating' max='100' min='0')
                 .form-text Введите субъективный рейтинг данной книги
+            .mb-3
+                .form-check
+                    input.form-check-input#flexCheckDefault(type='checkbox' name='in_library')
+                    label.form-check-label(for='flexCheckDefault') В наличии в данный момент
             button.btn.btn-outline-primary(type='submit') Добавить
 

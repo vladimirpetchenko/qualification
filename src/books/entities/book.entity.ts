@@ -38,16 +38,15 @@ export class Book {
   })
   genre: string;
 
+  @Column({
+    default: true,
+  })
+  in_library: boolean;
+
   @ManyToOne(() => Publisher, (publisher) => publisher.books, {
     nullable: true,
     eager: true,
   })
   @JoinColumn()
   publisher: Publisher;
-
-  @Column({
-    type: 'datetime',
-    default: 'CURRENT_TIMESTAMP',
-  })
-  createdAt: Date;
 }
